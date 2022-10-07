@@ -96,7 +96,7 @@ public class MemberController {
         String memberImageUrl = member.getMemberProfileUrl();
         if (memberImageUrl == null) throw new MemberImageNotFoundException("member image not found", ErrorCode.MEMBER_IMAGE_NOT_FOUND);
         // 기본 이미지가 아니라면 삭제 (url의 56번째에 폴더 명 (기본 이미지는 폴더 명 0))
-        if (memberImageUrl.charAt(56) != '0') s3Util.deleteFile(memberImageUrl.substring(49));
+//        if (memberImageUrl.charAt(56) != '0') s3Util.deleteFile(memberImageUrl.substring(49));
         memberService.modifyProfile(member, s3Url);
 
         return ResponseEntity.status(200).build();
