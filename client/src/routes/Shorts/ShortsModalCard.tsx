@@ -34,7 +34,7 @@ export interface shortsDetailType {
 const ShortsModalCard = (props: any) => {
   const { shortsData } = props;
   const [audio, setAudio] = useState(new Audio());
-  const [play, setPlay] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const createdTime = getCreatedTime(shortsData.shortsCreateTime);
@@ -47,17 +47,21 @@ const ShortsModalCard = (props: any) => {
     setLiked(shortsData.liked);
   }, [props]);
 
-  useEffect(() => {
+  const start = () => {
+    console.log('start');
+    audio.play();
     audio.loop = true;
-    return () => {
-      audio.pause();
-      audio.loop = false;
-    };
-  }, [audio]);
+  };
+
+  const stop = () => {
+    console.log('stop');
+    audio.pause();
+    audio.loop = false;
+  };
 
   useEffect(() => {
-    play ? audio.play() : audio.pause();
-  }, [play]);
+    return isPlay ? start() : stop();
+  }, [isPlay]);
 
   return (
     <>
@@ -82,14 +86,14 @@ const ShortsModalCard = (props: any) => {
           />
         </Profile>
         <Album
-          play={play}
+          play={isPlay}
           onClick={() => {
-            setPlay(!play);
+            setIsPlay(!isPlay);
           }}>
           <div>
             <i></i>
             <img src={shortsData.songImageUrl} alt="" />
-            {play ? (
+            {isPlay ? (
               <AiFillPauseCircle size={70} />
             ) : (
               <AiFillPlayCircle size={70} />
