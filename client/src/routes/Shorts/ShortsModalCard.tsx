@@ -33,16 +33,15 @@ export interface shortsDetailType {
 
 const ShortsModalCard = (props: any) => {
   const { shortsData } = props;
-  const [audio, setAudio] = useState(new Audio());
+  const [audio, setAudio] = useState(new Audio(shortsData.shortsAudioUrl));
   const [isPlay, setIsPlay] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const createdTime = getCreatedTime(shortsData.shortsCreateTime);
   const memberId = useRecoilValue(userInfoState).memberId;
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    setAudio(new Audio(shortsData.shortsAudioUrl));
     setLikeCount(shortsData.likeCount);
     setLiked(shortsData.liked);
   }, [props]);
