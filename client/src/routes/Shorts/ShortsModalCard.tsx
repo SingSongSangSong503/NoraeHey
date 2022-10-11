@@ -59,6 +59,13 @@ const ShortsModalCard = (props: any) => {
   };
 
   useEffect(() => {
+    return () => {
+      audio.pause();
+      audio.loop = false;
+    };
+  }, [audio]);
+
+  useEffect(() => {
     return isPlay ? start() : stop();
   }, [isPlay]);
 
