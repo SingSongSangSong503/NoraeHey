@@ -1,3 +1,15 @@
+FROM node:16.14.2 as build-stage
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
 # nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용합니다.
 FROM nginx
 
@@ -11,7 +23,7 @@ WORKDIR /app
 RUN mkdir ./dist
 
 # host pc의 현재경로의 dist 폴더를 workdir 의 dist 폴더로 복사
-ADD ./dist ./dist
+COPY --from=build-stage /app/dist ./dist
 
 # nginx 의 default.conf 를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
