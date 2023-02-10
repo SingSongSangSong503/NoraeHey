@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://j7a503.p.ssafy.io';
+const baseURL = 'https://t8c01.p.ssafy.io';
 
 const getAccessToken = () => {
   const accessToken = sessionStorage.getItem('accessToken');
