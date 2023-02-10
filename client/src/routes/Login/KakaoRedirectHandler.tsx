@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const BASE_URL = window.location.href.split('/')[2];
 const REDIRECT_URL =
   BASE_URL === 'localhost:3000'
-    ? 'https://j7a503.p.ssafy.io/api/v1/kakao/callback2'
-    : 'https://j7a503.p.ssafy.io/api/v1/kakao/callback';
+    ? 'https://t8c01.p.ssafy.io/api/v1/kakao/callback2'
+    : 'https://t8c01.p.ssafy.io/api/v1/kakao/callback';
 
 const KakaoRedirectHandler = () => {
   const location = useLocation();
