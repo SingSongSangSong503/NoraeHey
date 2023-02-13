@@ -4,7 +4,7 @@ DATABASES = {
     'NAME': 'noraehey_db',
     'USER': 'noraehey',
     'PASSWORD': 'noraehey503',
-    'HOST': 'j7a503.p.ssafy.io',
+    'HOST': 't8c01.p.ssafy.io',
     'PORT': '3306',
   }
 }
