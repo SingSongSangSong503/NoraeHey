@@ -2,8 +2,8 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.mysql', 
     'NAME': 'noraehey_db',
-    'USER': 'noraehey',
-    'PASSWORD': 'noraehey503',
+    'USER': 'ssafy',
+    'PASSWORD': 'ssafy',
     'HOST': 't8c01.p.ssafy.io',
     'PORT': '3306',
   }
