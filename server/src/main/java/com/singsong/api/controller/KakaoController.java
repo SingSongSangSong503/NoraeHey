@@ -33,8 +33,8 @@ public class KakaoController {
         url.append("https://kauth.kakao.com/oauth/authorize?");
         url.append("client_id=" + kakaoRestKey);
         // TODO: redirect url 수정
-//        url.append("&redirect_uri=https://j7a503.p.ssafy.io/api/v1/kakao/callback");
-        url.append("&redirect_uri=http://localhost:8081/api/v1/kakao/callback");
+        url.append("&redirect_uri=https://t8c01.p.ssafy.io/api/v1/kakao/callback");
+//        url.append("&redirect_uri=http://localhost:8081/api/v1/kakao/callback");
         url.append("&response_type=code");
         return "redirect:" + url;
     }
