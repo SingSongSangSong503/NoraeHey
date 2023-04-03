@@ -24,7 +24,7 @@ const ShortsCard = (props: any) => {
 };
 
 const ShortsBox = styled.div<{ albumUrl: string }>`
-  height: 100%;
+  width: 100%;
   border: lightgrey 1px solid;
   aspect-ratio: 1;
   box-sizing: border-box;
