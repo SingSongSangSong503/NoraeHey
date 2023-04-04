@@ -4,7 +4,7 @@ import { IoClose } from 'react-icons/io5';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { shortsListState } from '../../Atom';
 import { fetchData } from '../../utils/api/api';
@@ -18,7 +18,8 @@ const RandomShorts = () => {
   const shortsDatas = useRecoilValue(shortsListState);
   const [audio, setAudio] = useState(new Audio());
   const [play, setPlay] = useState(false);
-
+  const audioRef = useRef(new Audio());
+  let url = shortsDatas[nowIndex].shortsAudioUrl;
   const setScreenSize = () => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -26,44 +27,49 @@ const RandomShorts = () => {
   setScreenSize();
   window.addEventListener('resize', () => setScreenSize());
 
-  // useEffect(() => {
-  //   fetchData.get('/api/v1/shorts/random').then((res) => {
-  //     setShortsDatas(res.data);
-  //     setNowIndex(0);
-  //   });
-  // }, []);
+  const handlePlay = () => {
+    audioRef.current.play();
+  }
 
-  useEffect(() => {
-    if (nowIndex != -1) {
-      setAudio(new Audio(shortsDatas[nowIndex].shortsAudioUrl));
+  const handlePause = () => {
+    audioRef.current.pause();
+  }
+
+  const handleAudio = ()=>{
+    if(play){
+      handlePlay();
     }
+    else {
+      handlePause();
+    }
+  };
+  
+
+  useEffect(()=>{
+    audioRef.current.pause();
+  },[]);
+
+  useEffect(()=>{
+    handleAudio();
+  },[play]);
+
+  useEffect(()=>{
+    url = shortsDatas[nowIndex].shortsAudioUrl;
+    console.log(nowIndex);
+    handleAudio();
   }, [nowIndex]);
 
-  useEffect(() => {
-    audio.loop = true;
-    if (play) {
-      audio.play();
-      setPlay(true);
-    }
-    return () => {
-      audio.pause();
-      audio.loop = false;
-    };
-  }, [audio]);
-
-  useEffect(() => {
-    play ? audio.play() : audio.pause();
-  }, [play]);
 
   return (
     <Container>
+      <audio src={url} ref={audioRef}></audio>
       <Shorts>
         <Swiper
           spaceBetween={50}
           slidesPerView={1}
           onActiveIndexChange={(swiper) => {
             setNowIndex(swiper.realIndex);
-            audio.pause();
+            // audio.pause();
           }}>
           {shortsDatas.map((item, i) => (
             <SwiperSlide
