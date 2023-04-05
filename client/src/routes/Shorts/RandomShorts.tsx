@@ -13,10 +13,8 @@ import { shortsDetailType } from './ShortsDetailCard';
 import ShortsDetailCard from './ShortsDetailCard';
 
 const RandomShorts = () => {
-  // const [shortsDatas, setShortsDatas] = useState<shortsDetailType[]>([]);
   const [nowIndex, setNowIndex] = useState(0);
   const shortsDatas = useRecoilValue(shortsListState);
-  const [audio, setAudio] = useState(new Audio());
   const [play, setPlay] = useState(false);
   const audioRef = useRef(new Audio());
   let url = shortsDatas[nowIndex].shortsAudioUrl;
@@ -43,7 +41,6 @@ const RandomShorts = () => {
       handlePause();
     }
   };
-  
 
   useEffect(()=>{
     audioRef.current.pause();
@@ -55,14 +52,14 @@ const RandomShorts = () => {
 
   useEffect(()=>{
     url = shortsDatas[nowIndex].shortsAudioUrl;
-    console.log(nowIndex);
+//     console.log(nowIndex);
     handleAudio();
   }, [nowIndex]);
 
 
   return (
     <Container>
-      <audio src={url} ref={audioRef}></audio>
+      <audio src={url} ref={audioRef} loop></audio>
       <Shorts>
         <Swiper
           spaceBetween={50}
